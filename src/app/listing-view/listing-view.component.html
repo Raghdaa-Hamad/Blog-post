@@ -1,0 +1,50 @@
+<app-loading-indicator *ngIf="isLoading"></app-loading-indicator>
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+/>
+
+<ng-container *ngIf="!isError && blogPosts.length === 0">
+  <div class="no-posts-message">
+    <p>No blog posts available.</p>
+  </div>
+</ng-container>
+<ng-container *ngIf="!isError">
+  <div class="grid-container" *ngIf="!isLoading">
+    <div
+      *ngFor="let post of blogPosts"
+      class="grid-item"
+      (click)="navigateToPost(post.url)"
+    >
+      <img
+        *ngIf="post.cover_image"
+        [src]="post.cover_image"
+        alt="Cover Image"
+      />
+
+      <h2 class="tittle">
+        {{ post.title }}
+        <span class="arrow-icon material-symbols-outlined"> north_east </span>
+      </h2>
+
+      <p>{{ post.description }}</p>
+
+      <p>{{ post.user.username }}</p>
+      <p>{{ post.published_at }}</p>
+
+      <a [href]="post.url" target="_blank">Read more</a>
+    </div>
+  </div>
+</ng-container>
+
+<app-error-message
+  *ngIf="isError"
+  [errorMessage]="errorMessage"
+  (retry)="onRetryFetch()"
+></app-error-message>
+<app-pagination-control
+  [currentPage]="currentPage"
+  [totalPages]="totalPages"
+  (pageChange)="onPageChange($event)"
+>
+</app-pagination-control>

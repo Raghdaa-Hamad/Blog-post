@@ -1,0 +1,7 @@
+.main-container {
+  top: 50%;
+  position: absolute;
+  display: grid;
+  left: 100px;
+  right: 100px;
+}

@@ -1,0 +1,16 @@
+<div class="pagination">
+  <button (click)="onPreviousPage()" [disabled]="currentPage === 1">
+    Previous
+  </button>
+  <ng-container *ngFor="let page of pagesArray">
+    <button
+      (click)="onPageNumberClick(page)"
+      [class.active]="currentPage === page"
+    >
+      {{ page }}
+    </button>
+  </ng-container>
+  <button (click)="onNextPage()" [disabled]="currentPage === totalPages">
+    Next
+  </button>
+</div>
